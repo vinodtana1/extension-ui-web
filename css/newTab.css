@@ -147,6 +147,7 @@ input:focus {
 .exten-content-full {
   color: #fff;
   padding: 24px 50px;
+  padding-bottom: 0px;
 }
 .exten-content-top {
   display: flex;
@@ -184,7 +185,7 @@ input:focus {
 .exten-contentfull-content {
   display: flex;
   gap: 100px;
-  padding-top: 100px;
+  padding-top: 80px;
 }
 .exten-content-left,
 .exten-content-right {
@@ -205,6 +206,8 @@ input:focus {
   font-style: normal;
   font-weight: 500;
   line-height: 30px; /* 75% */
+  margin-top: 20px;
+  /* margin-bottom: 15px; */
 }
 .exten-content-time-date h3 {
   color: var(--Shade-0, #fff);
@@ -215,12 +218,15 @@ input:focus {
   font-weight: 400;
   line-height: 30px; /* 93.75% */
   letter-spacing: 3.84px;
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 .exten-content-center {
   width: 44%;
   border-radius: 16px;
   /* background: #393939; */
   padding: 16px 30px;
+  padding-bottom: 0px;
 }
 .exten-daily-quate-text-bottom {
   text-align: center;
@@ -303,7 +309,7 @@ input:focus {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
-  max-height: 130px;
+  max-height: 200px;
   overflow: scroll;
 }
 .exten-lisen-items-all1 {
@@ -320,8 +326,8 @@ input:focus {
   display: flex;
   gap: 10px;
   justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 15px;
+  margin-bottom: 20px;
 }
 .exten-lisen-row-c1 {
   color: #fff;
@@ -351,6 +357,12 @@ input:focus {
   display: flex;
   padding: 12px 16px;
   justify-content: space-between;
+}
+.exten-lisen-items-all .exten-lisen-items-row {
+  padding: 8px 16px;
+}
+.exten-lisen-items-all .exten-lisen-row-l img {
+  height: 45px;
 }
 .recent-podcasts-text-header p,
 .exten-lisen-items-row p {

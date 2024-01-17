@@ -1,4 +1,5 @@
 let searchbar, searchIcon;
+
 let list_item_template, list_item_node;
 const month = [
   "January",
@@ -54,7 +55,7 @@ function getAllEvents() {
     if (Http.responseText) {
       const resp = JSON.parse(Http.responseText);
       console.log("resp", resp);
-      const finalData = resp?.data[resp?.data?.length - 1];
+      const finalData = resp?.data;
       console.log("finalData", finalData);
       delete finalData?.event_time;
       delete finalData?.__v;
@@ -120,7 +121,7 @@ function getrecentProdcasts() {
     if (Http.responseText) {
       const resp = JSON.parse(Http.responseText);
       // console.log("resp", resp);
-      const finalData = resp?.data[resp?.data?.length - 1];
+      const finalData = resp?.data;
       // console.log("finalData", finalData);
       delete finalData?.event_time;
       delete finalData?.__v;
