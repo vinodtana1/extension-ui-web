@@ -15,7 +15,7 @@ const month = [
   "November",
   "December",
 ];
-const serverUrl = "http://13.233.1.1:4000/home";
+const serverUrl = "https://api.socialstarhub.com/home";
 window.onload = function () {
   searchbar = document.querySelector(".search-bar");
   // searchIcon = document.querySelector(".search-icon");
