@@ -52,8 +52,8 @@ window.onload = function () {
   // list_item_template = document.querySelector(".list-item-template");
   // list_item_node = document.importNode(list_item_template.content, true);
   addCurrentTime();
-  getrecentProdcasts();
-  getAllEvents();
+  // getrecentProdcasts();
+  // getAllEvents();
   appendallEvents(eventsData);
   appendRecentProdcasts(prodcastsData);
   // addTopSites();
