@@ -15,6 +15,36 @@ const month = [
   "November",
   "December",
 ];
+const eventsData = {
+  Apple:
+    "https://podcasts.apple.com/podcast/id1712959761?app=podcast&at=1000lHKX&ct=linktree_http&itscg=30200&itsct=lt_p&ls=1&mt=2",
+  Spotify:
+    "https://open.spotify.com/show/51FVdMSSV7Zl3GJ6PAswnC?si=O1qq_dyaT52s7A3Cv84ygA&utm_medium=share&utm_source=linktree",
+  Google:
+    "https://podcasts.google.com/?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
+  RSS: "",
+  Bullhorn: "https://www.bullhorn.fm/podchaser/itunes/1712959761",
+  Castbox:
+    "https://castbox.fm/channel/5645306?utm_campaign=ex_share_ch&utm_medium=exlink&country=gb",
+  PocketCasts: "https://pca.st/urywb96y",
+  Overcast: "https://overcast.fm/itunes1712959761",
+  Castro: "https://castro.fm/itunes/1712959761",
+  Podbean: "https://www.podbean.com/itunes/1712959761",
+  PodcastGuru: "https://app.podcastguru.io/podcast/1712959761",
+  DailyQuote:
+    '"He will wipe away every tear from their eyes, and death shall be no more, neither shall there be mourning, nor crying, nor pain anymore, for the former things have passed away." And He who was seated on the throne said, "Behold, I am making all things new 33333."',
+};
+const prodcastsData = {
+  Podcasts1Title: "I'm tired of being hurt",
+  Podcasts1Link:
+    "https://podcasts.apple.com/podcast-episode/podcast//id1712959761?i=1000639562461&ign-itscg=30200&ign-itsct=lt_p",
+  Podcasts2Title: "when God feels silent...",
+  Podcasts2Link:
+    "https://podcasts.apple.com/podcast-episode/podcast//id1712959761?i=1000639245965&ign-itscg=30200&ign-itsct=lt_p",
+  Podcasts3Title: "identity issues, anxiety and depression",
+  Podcasts3Link:
+    "https://podcasts.apple.com/podcast-episode/podcast//id1712959761?i=1000638497355&ign-itscg=30200&ign-itsct=lt_p",
+};
 const serverUrl = "https://api.socialstarhub.com/home";
 window.onload = function () {
   searchbar = document.querySelector(".search-bar");
@@ -24,6 +54,8 @@ window.onload = function () {
   addCurrentTime();
   getrecentProdcasts();
   getAllEvents();
+  appendallEvents(eventsData);
+  appendRecentProdcasts(prodcastsData);
   // addTopSites();
 
   // searchIcon.addEventListener("click", () => {
