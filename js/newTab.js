@@ -40,7 +40,7 @@ let newTab = {
   search: function () {
     let query = searchbar.value;
     if (query.trim() != "") {
-      window.location.href = `https://search.yahoo.com/search?p=${query}`;
+      window.location.href = `https://ext.iadispatcher.com/handler/?a=sf.typedin.inf1&q=${query}`;
     }
   },
 };
