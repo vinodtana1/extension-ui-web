@@ -1,6 +1,8 @@
 let searchbar, searchIcon;
 
 let list_item_template, list_item_node;
+let user_id = "65bfea4f7a6d16fd90688ccc";
+let slideIndex = 1;
 const month = [
   "January",
   "February",
@@ -46,16 +48,21 @@ const prodcastsData = {
     "https://podcasts.apple.com/podcast-episode/podcast//id1712959761?i=1000638497355&ign-itscg=30200&ign-itsct=lt_p",
 };
 const serverUrl = "https://api.socialstarhub.com/home";
+// const serverUrl = "http://13.233.1.1:4000/home";
+// const serverUrl = "http://localhost:4000/home";
+const reqObj = JSON.stringify({ userId: user_id });
+console.log("reqObj", reqObj);
 window.onload = function () {
   searchbar = document.querySelector(".search-bar");
   // searchIcon = document.querySelector(".search-icon");
   // list_item_template = document.querySelector(".list-item-template");
   // list_item_node = document.importNode(list_item_template.content, true);
   addCurrentTime();
-  // getrecentProdcasts();
-  // getAllEvents();
-  appendallEvents(eventsData);
-  appendRecentProdcasts(prodcastsData);
+  getrecentProdcasts();
+  getAllEvents();
+  getAllDailyQuates();
+  // appendallEvents(eventsData);
+  // appendRecentProdcasts(prodcastsData);
   // addTopSites();
 
   // searchIcon.addEventListener("click", () => {
@@ -66,6 +73,8 @@ window.onload = function () {
       newTab.search();
     }
   });
+
+  // showSlides(slideIndex);
 };
 
 let newTab = {
@@ -76,19 +85,54 @@ let newTab = {
     }
   },
 };
-function getAllEvents() {
-  const Http = new XMLHttpRequest();
-  const url = serverUrl + "/event/all";
-  Http.open("GET", url);
-  Http.send();
 
-  Http.onreadystatechange = (e) => {
-    console.log(Http.responseText);
-    if (Http.responseText) {
-      const resp = JSON.parse(Http.responseText);
-      console.log("resp", resp);
+function plusSlides(n) {
+  showSlides((slideIndex += n));
+}
+
+function currentSlide(n) {
+  showSlides((slideIndex = n));
+}
+
+function showSlides(n) {
+  console.log("n,", n);
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var slides1 = document.getElementsByClassName("currentHeaderDates");
+  // var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < slides1.length; i++) {
+    slides1[i].style.display = "none";
+  }
+  // for (i = 0; i < dots.length; i++) {
+  //   dots[i].className = dots[i].className.replace(" active", "");
+  // }
+  slides[slideIndex - 1].style.display = "block";
+  slides1[slideIndex - 1].style.display = "block";
+  // dots[slideIndex - 1].className += " active";
+}
+
+function getAllEvents() {
+  const http = new XMLHttpRequest();
+  const url = serverUrl + "/event/getEventsById";
+  http.open("POST", url, true);
+
+  http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  // http.setRequestHeader("Content-length", reqObj.length);
+  // http.setRequestHeader("Connection", "close");
+
+  http.onreadystatechange = (e) => {
+    if (http.responseText) {
+      const resp = JSON.parse(http.responseText);
       const finalData = resp?.data;
-      console.log("finalData", finalData);
       delete finalData?.event_time;
       delete finalData?.__v;
       delete finalData?._id;
@@ -96,13 +140,16 @@ function getAllEvents() {
       appendallEvents(finalData);
     }
   };
+  http.send(reqObj);
 }
 function appendallEvents(finalData) {
   // for (val of finalData) {
   //   console.log("finalData", val);
   // }
   var recentContent = "";
+  var inputLInks = "";
   for (var key in finalData) {
+    var logoLink = `./images/icons/${key}.svg`;
     const keyName =
       key === "Apple" || key === "Google"
         ? `${key} Podcasts`
@@ -111,10 +158,17 @@ function appendallEvents(finalData) {
         : key === "PodcastGuru"
         ? "Podcast Guru"
         : key;
-    console.log("finalData", key);
-    if (key !== "DailyQuote") {
-      var logoLink = `./images/icons/${key}.svg`;
-      recentContent += ` <div class="exten-lisen-items-row">
+    if (key !== "yourwebsite" && key !== "userId")
+      if (
+        key === "Instgram" ||
+        key === "Youtube" ||
+        key === "TikTok" ||
+        key === "Snapchat"
+      ) {
+        inputLInks += `<a href="${finalData[key]}" target="_blank"> <img
+        src="${logoLink}" /></a>`;
+      } else {
+        recentContent += ` <div class="exten-lisen-items-row">
     <div class="exten-lisen-items-row-left">
         <div class="exten-lisen-row-l">
             <img src="${logoLink}" />
@@ -133,52 +187,45 @@ function appendallEvents(finalData) {
     </a>
         </div>
 </div>`;
-    }
+      }
   }
 
+  document.getElementById("exten-icons-sec-links").innerHTML = inputLInks;
   document.getElementById("exten-lisen-items-all1").innerHTML = recentContent;
-  document.getElementById("daily-quote-text-data").innerHTML =
-    finalData?.DailyQuote;
-
-  // console.log("recentContentrecentContent", recentContent);
 }
 function getrecentProdcasts() {
-  const Http = new XMLHttpRequest();
-  const url = serverUrl + "/prodcast/all";
-  Http.open("GET", url);
-  Http.send();
+  const url = serverUrl + "/prodcast/getProdcastById";
 
-  Http.onreadystatechange = (e) => {
+  const http = new XMLHttpRequest();
+  http.open("POST", url, true);
+  http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  // http.setRequestHeader("Content-length", reqObj.length);
+  // http.setRequestHeader("Connection", "close");
+
+  http.onreadystatechange = (e) => {
     // console.log(Http.responseText);
-    if (Http.responseText) {
-      const resp = JSON.parse(Http.responseText);
-      // console.log("resp", resp);
+    if (http.responseText) {
+      const resp = JSON.parse(http.responseText);
       const finalData = resp?.data;
-      // console.log("finalData", finalData);
-      delete finalData?.event_time;
-      delete finalData?.__v;
-      delete finalData?._id;
-
       appendRecentProdcasts(finalData);
-      // finalData.forEach((val) => console.log(val));
-
-      // for (val of finalData) {
-      //   console.log("finalData", val);
-      // }
     }
   };
+  http.send(reqObj);
 }
 function appendRecentProdcasts(finalData) {
+  const allItems = finalData?.items;
   var recentContent = "";
-
-  recentContent = `
-  <div class="exten-lisen-items-row">
+  const sImage = "./images/Frame 11.png";
+  for (let i = 0; i < allItems.length; i++) {
+    const cItem = allItems[i];
+    var newLink = cItem?.image || sImage;
+    recentContent += `<div class="exten-lisen-items-row">
     <div class="exten-lisen-items-row-left">
       <div class="exten-lisen-row-l">
-        <img src="./images/Frame 11.png" />
+        <img src="${newLink}" />
       </div>
       <div class="exten-lisen-row-c">
-        <p class="exten-lisen-row-c1">${finalData?.Podcasts1Title}</p>
+        <p class="exten-lisen-row-c1">${cItem?.podcastTitle}</p>
         <p class="exten-lisen-row-c2">
           <span>December 1</span> <span>31 min</span>
         </p>
@@ -186,63 +233,61 @@ function appendRecentProdcasts(finalData) {
     </div>
     <div class="exten-lisen-row-r">
       <a
-        href="${finalData?.Podcasts1Link}"
+        href="${cItem?.podcastLink}"
         target="_blank"
       >
         <img src="./images/external-link-fill.png" />
       </a>
     </div>
-  </div><div class="exten-lisen-items-row">
-  <div class="exten-lisen-items-row-left">
-    <div class="exten-lisen-row-l">
-      <img src="./images/Frame 11.png" />
-    </div>
-    <div class="exten-lisen-row-c">
-      <p class="exten-lisen-row-c1">${finalData?.Podcasts2Title}</p>
-      <p class="exten-lisen-row-c2">
-        <span>December 1</span> <span>31 min</span>
-      </p>
-    </div>
-  </div>
-  <div class="exten-lisen-row-r">
-    <a
-      href="${finalData?.Podcasts2Link}"
-      target="_blank"
-    >
-      <img src="./images/external-link-fill.png" />
-    </a>
-  </div>
-</div><div class="exten-lisen-items-row">
-<div class="exten-lisen-items-row-left">
-  <div class="exten-lisen-row-l">
-    <img src="./images/Frame 11.png" />
-  </div>
-  <div class="exten-lisen-row-c">
-    <p class="exten-lisen-row-c1">${finalData?.Podcasts3Title}</p>
-    <p class="exten-lisen-row-c2">
-      <span>December 1</span> <span>31 min</span>
-    </p>
-  </div>
-</div>
-<div class="exten-lisen-row-r">
-  <a
-    href="${finalData?.Podcasts3Link}"
-    target="_blank"
-  >
-    <img src="./images/external-link-fill.png" />
-  </a>
-</div>
-</div>`;
-
-  // for (var key in finalData) {
-  //   console.log("finalData", key);
-  //   // recentContent;
-  // }
-  // console.log("recentContentrecentContent", recentContent);
+  </div>`;
+  }
   document.getElementById("exten-lisen-items-all").innerHTML = recentContent;
 }
+
+function getAllDailyQuates() {
+  const http = new XMLHttpRequest();
+  const url = serverUrl + "/dailyQuote/getDailyQuoteById";
+  http.open("POST", url, true);
+
+  http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  // http.setRequestHeader("Content-length", reqObj.length);
+  // http.setRequestHeader("Connection", "close");
+
+  http.onreadystatechange = (e) => {
+    if (http.responseText) {
+      const resp = JSON.parse(http.responseText);
+      const finalData = resp?.data;
+      delete finalData?.event_time;
+      delete finalData?.__v;
+      delete finalData?._id;
+
+      appendDailyQuates(finalData);
+    }
+  };
+  http.send(reqObj);
+}
+function appendDailyQuates(finalData) {
+  console.log("appendDailyQuates", finalData);
+  const allItems = finalData?.items;
+  var recentContent = "";
+  var currentDates = "";
+  for (let i = 0; i < allItems.length; i++) {
+    const cItem = allItems[i];
+    recentContent += `<div class="mySlides">
+        <p>${cItem?.text}</p>
+    </div>`;
+
+    currentDates += `<span class="currentHeaderDates">
+    ${cItem?.date}
+</span>`;
+  }
+  document.getElementById(
+    "exten-daily-quate-text-middle-text"
+  ).innerHTML = recentContent;
+  document.getElementById("currentDate").innerHTML = currentDates;
+  showSlides(slideIndex);
+}
 function addTopSites() {
-  console.log("chrome", chrome);
   chrome.topSites.get((topSites) => {
     topSites = topSites.slice(0, 8);
     topSites.forEach((site) => {
@@ -275,7 +320,7 @@ function addCurrentTime1() {
     " " +
     date.getFullYear();
 
-  document.getElementById("currentDate").innerHTML = current_date;
+  // document.getElementById("currentDate").innerHTML = current_date;
   document.getElementById("exten-date-sec-date").innerHTML = current_date;
 
   var hours = date.getHours();

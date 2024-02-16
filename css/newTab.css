@@ -263,6 +263,9 @@ input:focus {
   padding: 4px 5px;
   padding-top: 10px;
 }
+.exten-daily-quate-arrows span img {
+  cursor: pointer;
+}
 .right-arrow-sec {
   margin-left: 20px;
 }
@@ -385,4 +388,14 @@ input:focus {
   font-style: normal;
   font-weight: 500;
   line-height: 30px;
+}
+
+.exten-lisen-items-all,
+.exten-lisen-items-all1 {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: 2px; /* Firefox */
+}
+.exten-lisen-items-all::-webkit-scrollbar,
+.exten-lisen-items-all1::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }

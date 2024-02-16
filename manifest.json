@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "manifest_version": 3,
-  "name": "Vinod Custom tab",
-  "description": "Vinod Custom Search with html",
+  "name": "carewellington",
+  "description": "carewellington extension for daily updates",
   "icons": {
     "128": "./images/icon.png",
     "48": "./images/icon.png",
