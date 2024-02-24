@@ -18,39 +18,22 @@ const month = [
   "December",
 ];
 const eventsData = {
-  Apple:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  Snapchat:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  event_time: "2024-02-04T20:01:29.531Z",
-  Google:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  Instgram:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  PodcastGuru:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  RSS:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  Spotify:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  Youtube:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  Bullhorn:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  Castbox:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  Castro:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  Overcast:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  PocketCasts:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  Podbean:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  TikTok:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
-  yourwebsite:
-    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
+  Apple: "https://podcasts.apple.com/us/podcast/the-secret-place/id1712959761?ign-itscg=30200&ign-itsct=lt_p",
+  Snapchat: "https://www.snapchat.com/add/carewellington?invite_id=DmYgI4Ye&locale=en_US&share_id=wAkT2tXpR8mXHFcB7HE6Mw&sid=5ab73d7912fd49c187a237f3d2ba71b8",
+  Google: "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
+  Instgram: "https://www.instagram.com/carewellington",
+  PodcastGuru: "https://app.podcastguru.io/podcast/1712959761",
+  RSS: "https://anchor.fm/s/eb8b7428/podcast/rss",
+  Spotify: "https://open.spotify.com/show/51FVdMSSV7Zl3GJ6PAswnC?si=O1qq_dyaT52s7A3Cv84ygA&utm_medium=share&utm_source=linktree&nd=1&dlsi=09388a93681b437c",
+  Youtube: "https://www.youtube.com/@carew_ellington",
+  Bullhorn: "https://www.bullhorn.fm/page-not-found/not-imported",
+  Castbox: "https://castbox.fm/channel/5645306?utm_campaign=ex_share_ch&utm_medium=exlink&country=gb",
+  Castro: "https://castro.fm/podcast/da9d33e4-9585-4f3c-9a50-14b60d44cb65",
+  Overcast: "https://overcast.fm/login",
+  PocketCasts: "https://pca.st/urywb96y",
+  Podbean: "https://www.podbean.com/podcast-detail/gf4zq-2d5ac5/The-Secret-Place-Podcast",
+  TikTok: "https://tiktok.com/@carew_ellington",
+  yourwebsite: "https://carewellington.com/"
 };
 const prodcastsData = {
   _id: "65bfec937a6d16fd90688ce4",
@@ -207,10 +190,10 @@ function appendallEvents(finalData) {
       key === "Apple" || key === "Google"
         ? `${key} Podcasts`
         : key === "PocketCasts"
-        ? "Pocket Casts"
-        : key === "PodcastGuru"
-        ? "Podcast Guru"
-        : key;
+          ? "Pocket Casts"
+          : key === "PodcastGuru"
+            ? "Podcast Guru"
+            : key;
     if (key !== "yourwebsite" && key !== "userId")
       if (
         key === "Instgram" ||
