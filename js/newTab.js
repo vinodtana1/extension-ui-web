@@ -80,7 +80,7 @@ const dailyQData = {
     },
   ],
 };
-const serverUrl = "https://api.socialstarhub.com/home";
+const serverUrl = "https://trendsparkler.com/home";
 // const serverUrl = "http://13.233.1.1:4000/home";
 // const serverUrl = "http://localhost:4000/home";
 const reqObj = JSON.stringify({ userId: user_id });
