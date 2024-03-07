@@ -92,9 +92,9 @@ window.onload = function () {
   // list_item_node = document.importNode(list_item_template.content, true);
   addCurrentTime();
 
-  appendallEvents(eventsData);
-  appendRecentProdcasts(prodcastsData);
-  appendDailyQuates(dailyQData);
+  // appendallEvents(eventsData);
+  // appendRecentProdcasts(prodcastsData);
+  // appendDailyQuates(dailyQData);
 
   getrecentProdcasts();
   getAllEvents();
