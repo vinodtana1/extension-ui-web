@@ -261,7 +261,7 @@ input:focus {
   border-radius: 11px;
   background-color: rgba(229, 154, 54, 0.8);
   padding: 4px 5px;
-  padding-top: 10px;
+  padding-top: 13px;
 }
 .exten-daily-quate-arrows span img {
   cursor: pointer;
@@ -398,4 +398,7 @@ input:focus {
 .exten-lisen-items-all::-webkit-scrollbar,
 .exten-lisen-items-all1::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
+}
+.d-none {
+  display: none;
 }

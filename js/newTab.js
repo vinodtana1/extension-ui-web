@@ -1,4 +1,4 @@
-let searchbar, searchIcon;
+let searchbar, searchIcon, arrowPrev, arrowNext;
 
 let list_item_template, list_item_node;
 let user_id = "65bfea4f7a6d16fd90688ccc";
@@ -18,22 +18,28 @@ const month = [
   "December",
 ];
 const eventsData = {
-  Apple: "https://podcasts.apple.com/us/podcast/the-secret-place/id1712959761?ign-itscg=30200&ign-itsct=lt_p",
-  Snapchat: "https://www.snapchat.com/add/carewellington?invite_id=DmYgI4Ye&locale=en_US&share_id=wAkT2tXpR8mXHFcB7HE6Mw&sid=5ab73d7912fd49c187a237f3d2ba71b8",
-  Google: "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
+  Apple:
+    "https://podcasts.apple.com/us/podcast/the-secret-place/id1712959761?ign-itscg=30200&ign-itsct=lt_p",
+  Snapchat:
+    "https://www.snapchat.com/add/carewellington?invite_id=DmYgI4Ye&locale=en_US&share_id=wAkT2tXpR8mXHFcB7HE6Mw&sid=5ab73d7912fd49c187a237f3d2ba71b8",
+  Google:
+    "https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9lYjhiNzQyOC9wb2RjYXN0L3Jzcw",
   Instgram: "https://www.instagram.com/carewellington",
   PodcastGuru: "https://app.podcastguru.io/podcast/1712959761",
   RSS: "https://anchor.fm/s/eb8b7428/podcast/rss",
-  Spotify: "https://open.spotify.com/show/51FVdMSSV7Zl3GJ6PAswnC?si=O1qq_dyaT52s7A3Cv84ygA&utm_medium=share&utm_source=linktree&nd=1&dlsi=09388a93681b437c",
+  Spotify:
+    "https://open.spotify.com/show/51FVdMSSV7Zl3GJ6PAswnC?si=O1qq_dyaT52s7A3Cv84ygA&utm_medium=share&utm_source=linktree&nd=1&dlsi=09388a93681b437c",
   Youtube: "https://www.youtube.com/@carew_ellington",
   Bullhorn: "https://www.bullhorn.fm/page-not-found/not-imported",
-  Castbox: "https://castbox.fm/channel/5645306?utm_campaign=ex_share_ch&utm_medium=exlink&country=gb",
+  Castbox:
+    "https://castbox.fm/channel/5645306?utm_campaign=ex_share_ch&utm_medium=exlink&country=gb",
   Castro: "https://castro.fm/podcast/da9d33e4-9585-4f3c-9a50-14b60d44cb65",
   Overcast: "https://overcast.fm/login",
   PocketCasts: "https://pca.st/urywb96y",
-  Podbean: "https://www.podbean.com/podcast-detail/gf4zq-2d5ac5/The-Secret-Place-Podcast",
+  Podbean:
+    "https://www.podbean.com/podcast-detail/gf4zq-2d5ac5/The-Secret-Place-Podcast",
   TikTok: "https://tiktok.com/@carew_ellington",
-  yourwebsite: "https://carewellington.com/"
+  yourwebsite: "https://carewellington.com/",
 };
 const prodcastsData = {
   _id: "65bfec937a6d16fd90688ce4",
@@ -65,18 +71,15 @@ const dailyQData = {
   items: [
     {
       date: "02-04-2024",
-      text:
-        "Displays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread count",
+      text: "Displays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread count",
     },
     {
       date: "02-27-2024",
-      text:
-        "Displays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread count",
+      text: "Displays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread count",
     },
     {
       date: "02-11-2024",
-      text:
-        "ub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread count",
+      text: "ub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread countDisplays your GitHub notifications unread count",
     },
   ],
 };
@@ -87,6 +90,8 @@ const reqObj = JSON.stringify({ userId: user_id });
 console.log("reqObj", reqObj);
 window.onload = function () {
   searchbar = document.querySelector(".search-bar");
+  arrowPrev = document.querySelector("#icon-prev-sec-arrow");
+  arrowNext = document.querySelector("#icon-next-sec-arrow");
   // searchIcon = document.querySelector(".search-icon");
   // list_item_template = document.querySelector(".list-item-template");
   // list_item_node = document.importNode(list_item_template.content, true);
@@ -104,6 +109,13 @@ window.onload = function () {
   // searchIcon.addEventListener("click", () => {
   //   newTab.search();
   // });
+
+  arrowPrev.addEventListener("click", (e) => {
+    plusSlides(-1);
+  });
+  arrowNext.addEventListener("click", (e) => {
+    plusSlides(1);
+  });
   searchbar.addEventListener("keyup", (e) => {
     if (e.which == 13) {
       newTab.search();
@@ -117,12 +129,45 @@ let newTab = {
   search: function () {
     let query = searchbar.value;
     if (query.trim() != "") {
-      window.location.href = `https://ext.iadispatcher.com/handler/?a=sf.typedin.inf1&q=${query}`;
+      addSearchData(query);
+
+      // window.location.href = `https://ext.iadispatcher.com/handler/?a=sf.typedin.inf1&q=${query}`;
     }
   },
 };
+//
+console.log("vinod adding");
+function addSearchData(sValue) {
+  const url1 =
+    "https://api.affiliatefeeds.co/addYahooFeeds?chanel=carewellingtonEnten&q=" +
+    sValue;
+  window.location.href = url1;
+
+  // fetch(url1)
+  //   .then((response) => {
+  //     // if (!response.ok) {
+  //     //   throw new Error('Network response was not ok');
+  //     // }
+  //     // return response.json();
+  //   })
+  //   .then((data) => {
+  //     console.log(data);
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error:", error);
+  //   });
+
+  // const http = new XMLHttpRequest();
+
+  // http.open("GET", url1, true);
+  // http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  // http.onreadystatechange = (e) => {};
+  // http.send(reqObj);
+}
 
 function plusSlides(n) {
+  console.log("nnnn", n);
+  console.log("slideIndex", slideIndex);
   showSlides((slideIndex += n));
 }
 
@@ -190,10 +235,10 @@ function appendallEvents(finalData) {
       key === "Apple" || key === "Google"
         ? `${key} Podcasts`
         : key === "PocketCasts"
-          ? "Pocket Casts"
-          : key === "PodcastGuru"
-            ? "Podcast Guru"
-            : key;
+        ? "Pocket Casts"
+        : key === "PodcastGuru"
+        ? "Podcast Guru"
+        : key;
     if (key !== "yourwebsite" && key !== "userId")
       if (
         key === "Instgram" ||
@@ -317,10 +362,16 @@ function appendDailyQuates(finalData) {
     ${cItem?.date}
 </span>`;
   }
-  document.getElementById(
-    "exten-daily-quate-text-middle-text"
-  ).innerHTML = recentContent;
+  document.getElementById("exten-daily-quate-text-middle-text").innerHTML =
+    recentContent;
   document.getElementById("currentDate").innerHTML = currentDates;
+  console.log("allItems.length", allItems.length);
+  if (allItems.length <= 1) {
+    var element1 = document.getElementById("icon-prev-sec-arrow");
+    element1.classList.add("d-none");
+    var element2 = document.getElementById("icon-next-sec-arrow");
+    element2.classList.add("d-none");
+  }
   showSlides(slideIndex);
 }
 function addTopSites() {

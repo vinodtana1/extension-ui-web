@@ -4,9 +4,9 @@
   "name": "carewellington",
   "description": "carewellington extension for daily updates",
   "icons": {
-    "128": "./images/icon.png",
-    "48": "./images/icon.png",
-    "16": "./images/icon.png"
+    "128": "./images/Carewellington-Logo-Favicon.png",
+    "48": "./images/Carewellington-Logo-Favicon.png",
+    "16": "./images/Carewellington-Logo-Favicon.png"
   },
   "chrome_url_overrides": {
     "newtab": "./index.html"
